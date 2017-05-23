@@ -1,3 +1,4 @@
 //Curl npm auth from setmeup to ~/.npmrc
+//config set as per setmeup
 //npm publish
 sudo docker build --network host -t jfrog.local:5001/goofy:0.1 .
