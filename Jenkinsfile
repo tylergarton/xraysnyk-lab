@@ -2,7 +2,7 @@
 
 node ('master') {
     git url: 'https://github.com/markgalpin/goof'
-    def rtServer = Artifactory.newServer url: "http://jfrog.local/artifactory", credentialsId: 'jenkins'
+    def rtServer = Artifactory.newServer url: "http://jfrog.local/artifactory", credentialsId: CREDENTIALS
     def buildInfo = Artifactory.newBuildInfo()
     def tagDockerApp
     def rtDocker
@@ -11,7 +11,7 @@ node ('master') {
     stage ('build & deploy') {
             tagDockerApp = "jfrog.local:5001/goofy:${env.BUILD_NUMBER}"
             docker.build(tagDockerApp)
-            withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'jenkins', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+            withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: CREDENTIALS, usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
                 rtDocker = Artifactory.docker("${env.USERNAME}", "${env.PASSWORD}")
                 rtDocker.push(tagDockerApp, 'docker-stage-local', buildInfo)
                 rtServer.publishBuildInfo buildInfo
@@ -58,7 +58,7 @@ def reTagLatest (targetRepo) {
                break
       }
     sh 'cat retaga_out.json'
-    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'jenkins', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: CREDENTIALS, usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
         def curlString = "curl -u " + env.USERNAME + ":" + env.PASSWORD + " " + "http://jfrog.local/artifactory"
         def regTagStr = curlString +  "/api/docker/$targetRepo/v2/promote -X POST -H 'Content-Type: application/json' -T retaga_out.json"
         println "Curl String is " + regTagStr
