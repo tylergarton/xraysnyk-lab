@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 
 node ('master') {
-    git url: 'https://github.com/markgalpin/goof'
+    git url: GIT_URL
     def rtServer = Artifactory.newServer url: "http://jfrog.local/artifactory", credentialsId: CREDENTIALS
     def buildInfo = Artifactory.newBuildInfo()
     def tagDockerApp

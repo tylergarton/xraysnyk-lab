@@ -1,4 +1,17 @@
 //Curl npm auth from setmeup to ~/.npmrc
 //config set as per setmeup
+npm install snyk
 //npm publish
+//Build download blocking rule
 sudo docker build --network host -t jfrog.local:5001/goofy:0.1 .
+git pull -r
+insert sed command to update version
+git add -p
+git commit -m "Updated version string"
+//Follow instructions for git config
+npm publish
+npm install snyk
+sudo docker build --network host -t jfrog.local:5001/goofy:0.2 .
+//create npm-insecure-remote
+//switch repos in npm virtual
+//check xray for new alerts
