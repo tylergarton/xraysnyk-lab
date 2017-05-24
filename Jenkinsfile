@@ -66,7 +66,7 @@ rtServer.upload(uploadSpec, buildInfo)
 	      'failFast'	   : false
             ]
             rtServer.promote promotionConfig
-            reTagLatest (docker-prod-local)
+            reTagLatest ('docker-prod-local')
 
      }
 }
