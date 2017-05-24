@@ -3,6 +3,7 @@
 //npm publish
 //Build download blocking rule
 sudo docker build --network host -t jfrog.local:5001/goofy:0.1 .
+//create npm-insecure-local
 //build docker rule
 sudo docker push jfrog.local:5001/goofy:0.1
 sudo docker stop artifactory-standalone-2
