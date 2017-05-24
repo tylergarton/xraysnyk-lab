@@ -7,10 +7,7 @@ sudo docker build --network host -t jfrog.local:5001/goofy:0.1 .
 //build docker rule
 sudo docker push jfrog.local:5001/goofy:0.1
 sudo docker stop artifactory-standalone-2
-sudo docker run -p8085:3001 -d --name=goofy jfrog.local:5001/goofy:0.1
-sudo docker exec -it goofy /bin/bash
-//npm start in side goof module
-npm install snyk
+sudo docker run -p8085:3001 -d --rm --name=goofy --entrypoint="/bin/bash" jfrog.local:5001/goofy:0.1 /run.sh
 git pull -r
 insert sed command to update version
 git add -p
