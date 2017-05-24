@@ -7,7 +7,36 @@ node ('master') {
     def tagDockerApp
     def rtDocker
     buildInfo.env.capture = true
+   stage('Resolve') {
+          def warverstr=curlstr+ "api/search/latestVersion?g=org.jfrog.example.gradle&a=webservice&repos=libs-dev'"
+	         sh warverstr +' > war/version.txt'
+		        sh 'cat war/version.txt'
+			       env.WARVER=readFile('war/version.txt')
+			               def downloadSpec = """{
+ "files": [
+  {
+   "pattern": "jcenter/junit/junit/3.8.1/junit-3.8.1.jar",
+   "target": "junit-3.8.1.jar",
+   "flat":"true"
+  }
+  ]
+}"""
+    println(downloadSpec)
+        artServer.download(downloadSpec, buildInfo)
+	   }
 
+    stage('deploy') {
+       def uploadSpec = """{
+  "files": [
+    {
+      "pattern": "junit*.*",
+      "target": "libs-release-local/junit/junit/3.8.1/junit-3.8.1.jar"
+    }
+ ]
+}"""
+server.upload(uploadSpec, buildInfo)
+}
+	   
     stage ('build & deploy') {
             tagDockerApp = "jfrog.local:5001/goofy:${env.BUILD_NUMBER}"
             docker.build(tagDockerApp)

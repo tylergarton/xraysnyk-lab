@@ -15,3 +15,5 @@ sudo docker build --network host -t jfrog.local:5001/goofy:0.2 .
 //create npm-insecure-remote
 //switch repos in npm virtual
 //check xray for new alerts
+//run jenkins build by copying 
+//new watch on build

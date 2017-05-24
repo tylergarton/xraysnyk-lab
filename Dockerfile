@@ -1,4 +1,4 @@
-FROM jfrog.local:5001/ubuntu:trusty
+FROM jfrog.local:5001/debian
 MAINTAINER markg@jfrog.com
 RUN apt-get update && apt-get -y upgrade
 RUN apt-get install -y npm
