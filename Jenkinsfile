@@ -11,8 +11,8 @@ node ('master') {
 			               def downloadSpec = """{
  "files": [
   {
-   "pattern": "jcenter/junit/junit/3.8.1/junit-3.8.1.jar",
-   "target": "junit-3.8.1.jar",
+   "pattern": "jcenter-cache/junit/junit/3.8.1/junit-3.8.1.jar",
+   "target": "./",
    "flat":"true"
   }
   ]
