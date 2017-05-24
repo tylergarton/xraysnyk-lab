@@ -11,13 +11,15 @@ sudo docker run -p8085:3001 -d --rm --name=goofy --entrypoint="/bin/bash" jfrog.
 // Install httpie for exploits: sudo apt-get install httpie 
 // set exploit aliases: export GOOF_HOST=http://yourhost:8085; cd exploits; source exploit-aliases.sh
 git pull -r
-insert sed command to update version
+// Update version in package.json file and Dockerfile to 0.0.4
 git add -p
 git commit -m "Updated version string"
 //Follow instructions for git config
+npm install 
 npm publish
-npm install snyk
 sudo docker build --network host -t jfrog.local:5001/goofy:0.2 .
+// Kill running docker (sudo docker ps, find goofy ID, sudo docker kill <id>)
+// Rerun docker: sudo docker run -p8085:3001 -d --rm --name=goofy --entrypoint="/bin/bash" jfrog.local:5001/goofy:0.2 /run.sh
 //create npm-insecure-remote
 //switch repos in npm virtual
 //check xray for new alerts
