@@ -8,10 +8,6 @@ node ('master') {
     def rtDocker
     buildInfo.env.capture = true
    stage('Resolve') {
-          def warverstr=curlstr+ "api/search/latestVersion?g=org.jfrog.example.gradle&a=webservice&repos=libs-dev'"
-	         sh warverstr +' > war/version.txt'
-		        sh 'cat war/version.txt'
-			       env.WARVER=readFile('war/version.txt')
 			               def downloadSpec = """{
  "files": [
   {
@@ -61,9 +57,9 @@ server.upload(uploadSpec, buildInfo)
             def promotionConfig = [
               'buildName'          : env.JOB_NAME,
               'buildNumber'        : env.BUILD_NUMBER,
-              'targetRepo'         : docker-prod-local,
+              'targetRepo'         : 'docker-prod-local',
               'comment'            : 'App works with latest released version of gradle swampup app, tomcat and jdk',
-              'sourceRepo'         : docker-stage-local,
+              'sourceRepo'         : 'docker-stage-local',
               'status'             : 'Released',
               'includeDependencies': false,
               'copy'               : true
