@@ -18,7 +18,7 @@ node ('master') {
   ]
 }"""
     println(downloadSpec)
-        artServer.download(downloadSpec, buildInfo)
+        rtServer.download(downloadSpec, buildInfo)
 	   }
 
     stage('deploy') {
@@ -30,7 +30,7 @@ node ('master') {
     }
  ]
 }"""
-server.upload(uploadSpec, buildInfo)
+rtServer.upload(uploadSpec, buildInfo)
 }
 	   
     stage ('build & deploy') {
