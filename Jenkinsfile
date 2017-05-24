@@ -62,7 +62,8 @@ rtServer.upload(uploadSpec, buildInfo)
               'sourceRepo'         : 'docker-stage-local',
               'status'             : 'Released',
               'includeDependencies': false,
-              'copy'               : true
+              'copy'               : true,
+	      'failFast'	   : false
             ]
             rtServer.promote promotionConfig
             reTagLatest (docker-prod-local)
